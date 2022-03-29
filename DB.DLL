@@ -1,0 +1,27 @@
+create table table_admin
+(
+    id       varchar(255) not null comment '管理员id'
+        primary key,
+    userName varchar(255) not null comment '管理员账号',
+    pwd      varchar(255) not null comment '管理员密码'
+);
+
+
+-- auto-generated definition
+create table table_user
+(
+    id          varchar(255)  not null comment '用户唯一id'
+        primary key,
+    nickName    varchar(255)  not null,
+    phoneNumber varchar(255)  not null,
+    pwd         varchar(255)  not null,
+    sex         int default 0 not null comment '0:男
+1:女',
+    birthDate   datetime      not null comment '出生日期',
+    avatar      varchar(255)  not null comment '头像',
+    createTime  datetime      not null comment '注册日期',
+    status      int default 0 not null comment '0:正常
+1:封禁'
+)
+    comment '用户表';
+
