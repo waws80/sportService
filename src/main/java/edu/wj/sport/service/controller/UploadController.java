@@ -1,5 +1,6 @@
 package edu.wj.sport.service.controller;
 
+import edu.wj.sport.service.interceptor.IgnoreLogin;
 import edu.wj.sport.service.utils.CollectUtils;
 import edu.wj.sport.service.utils.FileType;
 import edu.wj.sport.service.utils.FileUtils;
@@ -27,6 +28,7 @@ public class UploadController {
 
 
 
+    @IgnoreLogin
     @PostMapping("upload")
     public ResponseEntity<Object> upload(FileType type, MultipartRequest files){
 

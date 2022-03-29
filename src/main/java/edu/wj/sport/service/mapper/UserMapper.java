@@ -30,7 +30,7 @@ public interface UserMapper {
 
     @Select("select * " +
             "from table_user " +
-            "where phone = #{phone};")
+            "where phoneNumber = #{phone};")
     UserBean findByPhone(String phone);
 
 

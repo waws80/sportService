@@ -46,7 +46,7 @@ public class UserController {
             return SportResponse.paramsError("参数不能为空");
         }
 
-        UserBean sel = userService.findByPhone(phone);
+        UserBean sel = userService.findByPhone(SecurityUtils.base64(phone));
         if (sel == null){
             boolean success = userService.addUser(SecurityUtils.generateUserId(),
                     nickname, SecurityUtils.base64(phone), SecurityUtils.md5(pwd),

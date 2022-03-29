@@ -3,6 +3,7 @@ package edu.wj.sport.service.utils;
 import edu.wj.sport.service.bean.UserBean;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.util.Base64Utils;
+import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -15,7 +16,7 @@ public class SecurityUtils {
 
 
     public static String md5(String content){
-        return MD5Encoder.encode(content.getBytes(StandardCharsets.UTF_8));
+        return DigestUtils.md5DigestAsHex(content.getBytes());
     }
 
     public static String base64(String content){
