@@ -32,6 +32,9 @@ public class MemoryCache {
      */
     public static boolean check(String userId, String deviceInfo){
         String cacheInfo = userCache.get(userId);
+        if (cacheInfo == null || cacheInfo.isEmpty()){
+            return false;
+        }
         return cacheInfo.equals(deviceInfo);
     }
 

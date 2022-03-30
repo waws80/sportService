@@ -109,23 +109,29 @@ public class UserController {
     public SportResponse updateInfo(){
         String nickName = httpServletRequest.getParameter("nickname");
         String pwd = httpServletRequest.getParameter("pwd");
+        String oldPwd = httpServletRequest.getParameter("oldPwd");
         String avatar = httpServletRequest.getParameter("avatar");
 
         String userId = httpServletRequest.getHeader("id");
 
         UserBean sel = userService.findById(userId);
 
-        if (!nickName.isEmpty()){
+        if (nickName != null && !nickName.isEmpty()){
             sel.setNickname(nickName);
         }
-        if (!pwd.isEmpty()){
-            sel.setPwd(SecurityUtils.md5(pwd));
+        if (pwd != null && !pwd.isEmpty() && oldPwd != null && !oldPwd.isEmpty()){
+            if (SecurityUtils.md5(oldPwd).equals(sel.getPwd())){
+                sel.setPwd(SecurityUtils.md5(pwd));
+            }else {
+                return SportResponse.paramsError("参数错误");
+            }
         }
-        if (!avatar.isEmpty()){
+        if (avatar != null && !avatar.isEmpty()){
             sel.setAvatar(avatar);
         }
 
         if (userService.updateInfo(userId, sel.getNickname(), sel.getPwd(), sel.getAvatar())){
+            sel = userService.findById(userId);
             sel.setPwd("");
             sel.setPhoneNumber(SecurityUtils.decoderBase64(sel.getPhoneNumber()));
             return SportResponse.success(sel);
