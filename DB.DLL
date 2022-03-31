@@ -25,3 +25,14 @@ create table table_user
 )
     comment '用户表';
 
+-- auto-generated definition
+create table table_sport_history
+(
+    id         varchar(255)     not null comment '记录id'
+        primary key,
+    userId     varchar(255)     not null comment '用户id',
+    mileage    double default 0 not null comment '本次运动记录总距离',
+    duration   mediumtext       not null comment '本次运动时长',
+    points     longtext         not null comment '运动的轨迹数据',
+    createTime mediumtext       not null
+);
