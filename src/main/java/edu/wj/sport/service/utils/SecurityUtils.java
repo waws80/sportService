@@ -30,4 +30,8 @@ public class SecurityUtils {
     public static String generateUserId(){
         return UUID.randomUUID().toString().replace("-","");
     }
+
+    public static String generateSportId(){
+        return "sport-" + UUID.randomUUID().toString().replace("-","");
+    }
 }

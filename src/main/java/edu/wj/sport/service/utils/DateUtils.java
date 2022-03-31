@@ -10,6 +10,18 @@ import java.util.TimeZone;
 public class DateUtils {
 
 
+    public static String formatTime(long duration) {
+
+        long second = duration % 60;
+
+        long minute = duration / 60;
+
+        long hour = minute / 60;
+
+        return String.format("%02d", hour) + ":" + String.format("%02d", minute) + ":" + String.format("%02d", second);
+
+    }
+
 
     public static String formatDate(long duration){
 

@@ -14,7 +14,7 @@ public class HeaderEditFilter implements Filter {
             ((HttpServletResponse) response).setHeader("Access-Control-Allow-Credentials", "true");
             ((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, PUT, OPTIONS, DELETE");
             ((HttpServletResponse) response).setHeader("Access-Control-Max-Age", "3600");
-            ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, token");
+            ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, id, deviceInfo");
         }
         chain.doFilter(request, response);
     }

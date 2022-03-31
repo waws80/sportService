@@ -1,7 +1,9 @@
 package edu.wj.sport.service.interceptor;
 
+import edu.wj.sport.service.bean.AdminBean;
 import edu.wj.sport.service.bean.UserBean;
 import edu.wj.sport.service.memory.MemoryCache;
+import edu.wj.sport.service.service.AdminService;
 import edu.wj.sport.service.service.UserService;
 import edu.wj.sport.service.utils.CollectUtils;
 import edu.wj.sport.service.utils.GsonUtils;
@@ -22,6 +24,9 @@ public class RequestInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AdminService adminService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -51,6 +56,10 @@ public class RequestInterceptor implements HandlerInterceptor {
         }
 
         UserBean sel = userService.findById(id);
+        AdminBean adminBean = adminService.findById(id);
+        if (adminBean != null && sel == null){
+            return HandlerInterceptor.super.preHandle(request, response, handler);
+        }
         if (sel == null){
             buildBadResult(response);
             return false;
