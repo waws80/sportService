@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * 用户信息增删改查
@@ -92,7 +95,7 @@ public class UserController {
     @PutMapping("status")
     public SportResponse updateStatus(){
         String status = httpServletRequest.getParameter("status");
-        String userId = httpServletRequest.getHeader("id");
+        String userId = httpServletRequest.getParameter("userId");
         if (status.isEmpty()){
             return SportResponse.paramsError("参数不能为空");
         }
@@ -141,7 +144,19 @@ public class UserController {
 
     @GetMapping("allUser")
     public SportResponse getAllUser(){
-        return SportResponse.success(userService.findAll());
+
+        List<UserBean> userBeans = userService.findAll();
+
+        List<UserBean> result = userBeans.stream().map(new Function<UserBean, UserBean>() {
+            @Override
+            public UserBean apply(UserBean userBean) {
+                userBean.setPwd("");
+                userBean.setPhoneNumber(SecurityUtils.decoderBase64(userBean.getPhoneNumber()));
+                return userBean;
+            }
+        }).collect(Collectors.toList());
+
+        return SportResponse.success(result);
     }
 
 

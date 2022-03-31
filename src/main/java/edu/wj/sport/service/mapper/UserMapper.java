@@ -19,12 +19,12 @@ public interface UserMapper {
     int addUser(String id, String nickName, String phoneNumber, String pwd, int sex, long birthDate, String avatar, long createTime, int status);
 
     @Update("update table_user " +
-            "set status = #{status}" +
+            "set status = #{status} " +
             "where id = #{id};")
     int updateStatus(String id, int status);
 
     @Update("update table_user " +
-            "set nickName = #{nickName}, pwd = #{pwd}, avatar = #{avatar}" +
+            "set nickName = #{nickName}, pwd = #{pwd}, avatar = #{avatar} " +
             "where id = #{id};")
     int updateInfo(String id, String nickName, String pwd, String avatar);
 

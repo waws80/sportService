@@ -2,6 +2,7 @@ package edu.wj.sport.service.config;
 
 import edu.wj.sport.service.filter.HeaderEditFilter;
 import edu.wj.sport.service.interceptor.RequestInterceptor;
+import edu.wj.sport.service.utils.FileUtils;
 import edu.wj.sport.service.utils.GsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -26,7 +27,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("file:/Users/thanatos/sport-resources/");
+        String path = "file:/Users/thanatos/sport-resources/";
+        if (System.getProperty("os.name").startsWith("Windows")){
+            path = "file:E:\\sport-resources\\";
+        }
+        registry.addResourceHandler("/resources/**").addResourceLocations(path);
     }
 
     @Override

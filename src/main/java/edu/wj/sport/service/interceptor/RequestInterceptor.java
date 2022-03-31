@@ -41,6 +41,9 @@ public class RequestInterceptor implements HandlerInterceptor {
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }
 
+        if (request.getServletPath().equals("/error")){
+            return true;
+        }
 
 
         String id = request.getHeader("id");
