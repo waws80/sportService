@@ -73,6 +73,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             return false;
         }
 
+
         if (!MemoryCache.check(id, deviceInfo)){
             buildUnAuthResult(response);
             return false;
