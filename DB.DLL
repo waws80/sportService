@@ -36,3 +36,19 @@ create table table_sport_history
     points     longtext         not null comment '运动的轨迹数据',
     createTime mediumtext       not null
 );
+
+
+-- auto-generated definition
+create table table_curriculum
+(
+    id       int auto_increment comment '课程编号'
+        primary key,
+    thumb    varchar(255) not null comment '介绍图片',
+    video    varchar(255) not null comment '视频文件',
+    cname    varchar(255) not null comment '课程名称',
+    tip      varchar(255) not null comment '标签',
+    type     varchar(255) not null comment '类别',
+    duration mediumtext   not null comment '课程时长',
+    content  longtext     not null comment '课程介绍'
+)
+    comment '课程表';
