@@ -85,6 +85,9 @@ public class UserController {
         if (!sel.getPwd().equals(SecurityUtils.md5(pwd))){
             return SportResponse.paramsError("密码错误");
         }
+        if (sel.getStatus() == 1){
+            return SportResponse.black();
+        }
         sel.setPwd("");
         sel.setPhoneNumber(SecurityUtils.decoderBase64(sel.getPhoneNumber()));
         MemoryCache.putCache(sel.getId(), deviceInfo);

@@ -1,11 +1,14 @@
 package edu.wj.sport.service.controller;
 
+import edu.wj.sport.service.bean.CurriculumBean;
 import edu.wj.sport.service.service.CurriculumService;
 import edu.wj.sport.service.utils.SportResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("curriculum")
@@ -91,6 +94,17 @@ public class CurriculumController {
             return SportResponse.success(this.curriculumService.findAll());
         }
         return SportResponse.success(this.curriculumService.findByType(type));
+    }
+
+    @GetMapping("recommend")
+    public SportResponse recommend(){
+        List<CurriculumBean> list = this.curriculumService.findAll();
+        Collections.shuffle(list);
+        if (list.size() < 6){
+            return SportResponse.success(list);
+        }else {
+            return SportResponse.success(list.subList(0, 6));
+        }
     }
 
 
